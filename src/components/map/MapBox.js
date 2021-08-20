@@ -1,8 +1,24 @@
-import React, { useRef, useState } from "react";
-import ReactMapGL, { Marker, FlyToInterpolator } from "react-map-gl";
+import React, { useEffect, useRef, useState } from "react";
+import ReactMapGL, {
+  Marker,
+  FlyToInterpolator,
+  GeolocateControl,
+  NavigationControl,
+} from "react-map-gl";
 import useSwr from "swr";
 import useSupercluster from "use-supercluster";
+import MapboxDirections from "@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions";
+// import MapboxDirections from "@mapbox/mapbox-gl-directions";
 // import custodyimg from "../images/custody.svg";
+
+const geolocateControlStyle = {
+  right: 10,
+  top: 10,
+};
+const navigationControlStyle = {
+  ...geolocateControlStyle,
+  top: 50,
+};
 
 const fetcher = (...args) => fetch(...args).then(res => res.json());
 
@@ -16,7 +32,13 @@ const Map = () => {
   });
   const mapRef = useRef();
 
-  console.log(process.env.REACT_APP_MAPBOX_TOKEN)
+  const Directions = new MapboxDirections({
+    accessToken: process.env.REACT_APP_MAPBOX_TOKEN,
+    unit: "metric",
+    profile: "mapbox/driving",
+  });
+
+  console.log(Directions);
 
   //load and prepare data
   const url =
@@ -64,53 +86,14 @@ const Map = () => {
       maxZoom={20}
       ref={mapRef}
     >
-      {/* {clusters.map(cluster => {
-        const [longitude, latitude] = cluster.geometry?.coordinates;
-        const { cluster: isCluster, point_count: pointCount } =
-          cluster.properties;
-
-        if (isCluster) {
-          return (
-            <Marker key={cluster.id} latitude={latitude} longitude={longitude}>
-              <div
-                className="cluster-marker"
-                style={{
-                  width: `${10 + (pointCount / points.length) * 50}px`,
-                  height: `${10 + (pointCount / points.length) * 50}px`,
-                }}
-                onClick={() => {
-                  const expansionZoom = Math.min(
-                    supercluster.getClusterExpansionZoom(cluster.id),
-                    20
-                  );
-                  setViewport({
-                    ...viewport,
-                    latitude,
-                    longitude,
-                    zoom: expansionZoom,
-                    transitionInterpolator: new FlyToInterpolator({ speed: 2 }),
-                    transitionDuration: "auto",
-                  });
-                }}
-              >
-                {pointCount}
-              </div>
-            </Marker>
-          );
-        }
-
-        return (
-          <Marker
-            key={cluster.properties.crimeId}
-            latitude={latitude}
-            longitude={longitude}
-          >
-            <button className="crime-marker">
-              <img src={custodyimg} alt="crime" />
-            </button>
-          </Marker>
-        );
-      })} */}
+      {/* <Directions /> */}
+      <GeolocateControl
+        style={geolocateControlStyle}
+        positionOptions={{ enableHighAccuracy: true }}
+        trackUserLocation={true}
+        auto
+      />
+      <NavigationControl style={navigationControlStyle} />
     </ReactMapGL>
   );
 };
