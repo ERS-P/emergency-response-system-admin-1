@@ -1,16 +1,14 @@
-import React from "react"
-import './App.css';
-import { Base } from "../src/components/gen"
-import {BrowserRouter, BrowserRouter as Router} from "react-router-dom"
-
+import React from "react";
+import "./App.css";
+import Navigator from "./navigation/";
+import { Provider } from "./context";
+// import
 
 function App() {
   return (
-    <BrowserRouter >
-      <div style={{display: "flex", flex: 1, minHeight: "100vh", flexDirection: "column"}}>
-        <Base />
-      </div>
-   </BrowserRouter>
+    <Provider>
+      <Navigator />
+    </Provider>
   );
 }
 

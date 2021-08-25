@@ -36,3 +36,18 @@
     transform: rotate(360deg);
   }
 }
+
+.home {
+  background: url("./assets/img/background.jpg");
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow: hidden;
+}
+
+label {
+  font-family: Raleway-extra-bold;
+  font-size: 32px;
+  color: #152e87;
+}

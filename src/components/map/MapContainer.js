@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Map from "./MapBox";
+import MapClassComponent from "./MapClassComponent";
 
 const MapContainer = () => {
   return (
@@ -11,7 +12,8 @@ const MapContainer = () => {
         minHeight: "700px",
       }}
     >
-      <Map />
+      {/* <Map /> */}
+      <MapClassComponent />
     </div>
   );
 };

@@ -4,6 +4,7 @@ import ReactMapGL, {
   FlyToInterpolator,
   GeolocateControl,
   NavigationControl,
+  Layer,
 } from "react-map-gl";
 import useSwr from "swr";
 import useSupercluster from "use-supercluster";
@@ -31,14 +32,6 @@ const Map = () => {
     zoom: 12,
   });
   const mapRef = useRef();
-
-  const Directions = new MapboxDirections({
-    accessToken: process.env.REACT_APP_MAPBOX_TOKEN,
-    unit: "metric",
-    profile: "mapbox/driving",
-  });
-
-  console.log(Directions);
 
   //load and prepare data
   const url =
@@ -86,6 +79,7 @@ const Map = () => {
       maxZoom={20}
       ref={mapRef}
     >
+      {/* <Layer {...directions} /> */}
       {/* <Directions /> */}
       <GeolocateControl
         style={geolocateControlStyle}

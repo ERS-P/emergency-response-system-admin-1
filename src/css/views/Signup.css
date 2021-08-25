@@ -1,0 +1,80 @@
+.sign-up {
+  display: flex;
+  flex-direction: column;
+  margin-top: 50px;
+  margin-left: 110px;
+  width: 30%;
+}
+
+ul {
+  display: flex;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  font-family: Raleway-extra-bold;
+  font-size: 15px;
+  letter-spacing: 1px;
+  color: #152e87;
+}
+
+li {
+  text-transform: uppercase;
+  text-decoration: none;
+  padding-right: 10px;
+}
+
+#sign-up-form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 100px;
+}
+
+#sign-up-form input {
+  width: 100%;
+  height: 34px;
+  margin-top: 20px;
+  padding-left: 10px;
+  border-radius: 5px;
+  font-family: Raleway-medium;
+  font-size: 14px;
+}
+
+.sign-up-btn {
+  width: 104%;
+  height: 38px;
+  background-color: #152e87;
+  color: white;
+  border: none;
+  cursor: pointer;
+  margin-top: 15px;
+  font-family: Raleway-bold;
+  font-size: 18px;
+  border-radius: 4px;
+}
+
+.remember {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+  font-family: Raleway-medium;
+  font-size: 13px;
+}
+
+.regis {
+  margin-top: 10px;
+  font-family: Raleway-medium;
+}
+
+.regis a {
+  text-decoration: none;
+  padding-left: 4px;
+  color: #152e87;
+  font-family: Raleway-semi-bold;
+}
+
+.names {
+  display: flex;
+  flex-direction: row;
+  width: 104%;
+}
