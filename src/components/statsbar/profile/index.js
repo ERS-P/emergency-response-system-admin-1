@@ -1,14 +1,15 @@
-import React from "react";
+import React, { useContext, useRef, useState, useEffect } from "react";
 import { Switch, Route } from "react-router-dom";
 import styled from "styled-components";
 import routes from "../../../navigation/routes";
-import pfp from "../../../assets/img/pfp.png";
-import Dropdown from "./Dropdown";
+import { AppContext } from "../../../context/index";
+import RightProfile from "./RightProfile";
 
 const BottomSheet = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 1.5em 2.2em;
+  // border: 1px solid;
 
   p {
     margin: 0;
@@ -19,35 +20,16 @@ const BottomSheet = styled.div`
     font-weight: 600;
   }
 
-  #right-div {
-    position: relative;
-    // border: 1px solid;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 1em;
-
-    #name {
-      color: white;
-      font-weight: 600;
-      margin: 0 0.5em;
-      font-size: 0.9em;
-    }
-
-    #pfp {
-      width: 2em;
-      height: 2em;
-      border-radius: 50%;
-      object-fit: cover;
-    }
-  }
-
   }
 `;
 
-const index = () => {
+function Profile() {
+  const { appState } = useContext(AppContext);
+  const [showDropdown, setShowDropdown] = useState(false);
+  const { currentUser } = appState;
+
   return (
-    <BottomSheet>
+    <BottomSheet onClick={() => setShowDropdown(true)}>
       <div className="pagetitle">
         <Switch>
           {routes.map((route, index) => (
@@ -61,24 +43,12 @@ const index = () => {
         </Switch>
       </div>
 
-      <div id="right-div">
-        <img src={pfp} id="pfp" />
-        <p id="name">Philip Amankwah</p>
-        <Dropdown />
-
-        {/* <div id="drop-down">
-          <p id="welcome-note">WELCOME!</p>
-          <ul>
-            <li>My profile</li>
-            <li>Settings</li>
-            <li>Activity</li>
-            <li>Support</li>
-            <li>Logout</li>
-          </ul>
-        </div> */}
-      </div>
+      <RightProfile
+        showDropdown={showDropdown}
+        setShowDropdown={setShowDropdown}
+      />
     </BottomSheet>
   );
-};
+}
 
-export default index;
+export default Profile;

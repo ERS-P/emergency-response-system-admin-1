@@ -10,6 +10,9 @@ const AuthNavigation = () => {
       <Route exact path="/">
         <Redirect to="/sign-in" />
       </Route>
+      <Route>
+        <Signin />
+      </Route>
     </Switch>
   );
 };

@@ -13,7 +13,7 @@ function Signup(props) {
   const [error1, setError1] = useState("");
   const [loading, setLoading] = useState(false);
   const history = useHistory();
-  const { signup } = useContext(AppContext);
+  const { signup, appDispatch } = useContext(AppContext);
   async function handleSubmit(e) {
     e.preventDefault();
 
@@ -30,7 +30,8 @@ function Signup(props) {
         firstNameRef.current.value,
         lastNameRef.current.value
       );
-      history.push("/");
+
+      history.push("/sign-in");
     } catch {
       setError1("Failed to create an account");
     }

@@ -6,14 +6,6 @@ export const initialState = {
   currentUser: {},
 };
 
-// useEffect(() => {
-//   const unsubscribe = auth.onAuthStateChanged(user => {
-//     setCurrentUser(user);
-//   });
-
-//   return unsubscribe;
-// }, []);
-
 export const reducer = (state, action) => {
   const { type, payload, user } = action;
 
@@ -28,6 +20,7 @@ export const reducer = (state, action) => {
       return {
         ...state,
         isLoggedIn: false,
+        currentUser: undefined,
       };
 
     case "set_user":
@@ -35,15 +28,6 @@ export const reducer = (state, action) => {
         ...state,
         currentUser: user,
       };
-
-    // case "signin":
-    //   return state;
-
-    // case "signup":
-    //   return state;
-
-    // case "reset_password":
-    //   return state;
 
     default:
       return state;
