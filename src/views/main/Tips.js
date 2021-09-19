@@ -44,7 +44,7 @@ const Tips = () => {
 
   return (
     <>
-      <Container className="mt--7" fluid>
+      <Container className="mt--10" fluid>
         <Row>
           <div className="col">
             <Card className="bg-secondary shadow">
