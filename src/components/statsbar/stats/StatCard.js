@@ -1,14 +1,15 @@
 import React from "react";
 import styled from "styled-components";
+import Badge from "./Badge";
 import { ReactComponent as Arrow } from "../../../assets/svgs/arrow-up.svg";
+import { ReactComponent as Toggle } from "../../../assets/svgs/toggle-off.svg";
 
 const BottomSheet = styled.div`
   display: flex;
   flex-direction: column;
   background-color: white;
-  padding: 1.5em 1.5em;
-  //   border: 1px solid white;
-  width: 20%;
+  padding: 1em 1.5em;
+  width: 23.5%;
   border-radius: 0.5em;
 
   p {
@@ -16,13 +17,23 @@ const BottomSheet = styled.div`
   }
 
   #upper {
-    margin-bottom: 1em;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
 
     #upper-upper {
+      padding: 0;
+
       p {
         color: #8a9aac;
-        font-weight: 700;
+        font-weight: 900;
         font-size: 0.8em;
+        margin: 0;
+      }
+
+      #figure {
+        font-size: 1.5em;
+        margin: 0;
       }
     }
 
@@ -36,6 +47,7 @@ const BottomSheet = styled.div`
   }
 
   #lower {
+    // border: 1px solid black;
     #timespan {
       font-weight: 1;
       color: #a9b4c1;
@@ -44,15 +56,16 @@ const BottomSheet = styled.div`
   }
 `;
 
-const StatCard = () => {
+const StatCard = ({ title = "EMERGENCY", icon = Toggle, bg = "orange" }) => {
   return (
     <BottomSheet>
       <div id="upper">
         <div id="upper-upper">
-          <p>EMERGENCY</p>
+          <p>{title}</p>
+          <p id="figure">0</p>
         </div>
         <div id="upper-lower">
-          <p>1</p>
+          <Badge icon={icon} bg={bg} />
         </div>
       </div>
 

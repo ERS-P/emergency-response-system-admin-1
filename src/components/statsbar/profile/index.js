@@ -8,8 +8,7 @@ import RightProfile from "./RightProfile";
 const BottomSheet = styled.div`
   display: flex;
   justify-content: space-between;
-  padding: 1.5em 2.2em;
-  // border: 1px solid;
+  padding: 1.2em 2.2em;
 
   p {
     margin: 0;
@@ -17,7 +16,7 @@ const BottomSheet = styled.div`
 
   .pagetitle {
     color: white;
-    font-weight: 600;
+    font-weight: 900;
   }
 
   }

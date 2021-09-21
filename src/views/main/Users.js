@@ -12,14 +12,14 @@ import {
   Row,
   Col,
 } from "reactstrap";
-import { getUserData } from "../../api/auth";
+// import { getUserData } from "../../api/auth";
 const Users = () => {
-  const [users, setUsers] = useState(getUserData);
+  // const [users, setUsers] = useState(getUserData);
   // useEffect(()=>console.log(users))
 
   return (
     <>
-      <Container className="mt--7" fluid>
+      <Container className="mt--10" fluid>
         <Row className="mt-5">
           <Col className="mb-5 mb-xl-0" xl="12">
             <Card className="shadow">
@@ -56,7 +56,7 @@ const Users = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {users.map((items, index) => {
+                  {/* {users.map((items, index) => {
                     return (
                       <tr key={index}>
                         <td>{items.userID}</td>
@@ -87,7 +87,7 @@ const Users = () => {
                         </td>
                       </tr>
                     );
-                  })}
+                  })} */}
                 </tbody>
               </Table>
               <CardFooter className="py-4">

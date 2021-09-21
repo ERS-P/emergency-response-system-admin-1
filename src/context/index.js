@@ -1,7 +1,13 @@
 import React, { createContext, useReducer, useEffect, useState } from "react";
 // import firebase from "firebase";
 import { reducer, initialState } from "./reducer";
-import { auth } from "../firebase";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  sendPasswordResetEmail,
+  onAuthStateChanged,
+} from "../firebase";
+
 const AppContext = createContext({});
 
 function Provider(props) {
@@ -10,15 +16,15 @@ function Provider(props) {
   // console.log(appState, appDispatch, "ctx1");
 
   function signup(email, password) {
-    return auth.createUserWithEmailAndPassword(email, password);
+    return createUserWithEmailAndPassword(email, password);
   }
 
   function login(email, password) {
-    return auth.signInWithEmailAndPassword(email, password);
+    return signInWithEmailAndPassword(email, password);
   }
 
   function resetPassword(email) {
-    return auth.sendPasswordResetEmail(email);
+    return sendPasswordResetEmail(email);
   }
 
   function submitTips({ title, description, setLoading }) {
@@ -47,18 +53,16 @@ function Provider(props) {
     //   });
   }
 
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged(user => {
-      appDispatch({
-        type: "set_user",
-        user,
-      });
-    });
+  // useEffect(() => {
+  //   const unsubscribe = onAuthStateChanged(user => {
+  //     appDispatch({
+  //       type: "set_user",
+  //       user,
+  //     });
+  //   });
 
-    return unsubscribe;
-  }, []);
-
-  console.log(auth);
+  //   return unsubscribe;
+  // }, []);
 
   return (
     <AppContext.Provider

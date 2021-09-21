@@ -1,17 +1,24 @@
-import firebase from "firebase";
+// import firebase from "firebase";
+import {
+  dbRef,
+  createUserWithEmailAndPassword,
+  sendEmailVerification,
+  signInWithEmailAndPassword,
+  sendPasswordResetEmail,
+  signOut,
+} from "../firebase";
+// // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+// const firebaseConfig = {
+//   apiKey: "AIzaSyAnviofAwpud7RI5hOzvJPyuzqzHJ8t19A",
+//   authDomain: "emergency-response-system-2021.firebaseapp.com",
+//   projectId: "emergency-response-system-2021",
+//   storageBucket: "emergency-response-system-2021.appspot.com",
+//   messagingSenderId: "414522555581",
+//   appId: "1:414522555581:web:29f74477e715dc3edd0bd4",
+//   measurementId: "G-TF1V1JZLPV",
+// };
 
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyAnviofAwpud7RI5hOzvJPyuzqzHJ8t19A",
-  authDomain: "emergency-response-system-2021.firebaseapp.com",
-  projectId: "emergency-response-system-2021",
-  storageBucket: "emergency-response-system-2021.appspot.com",
-  messagingSenderId: "414522555581",
-  appId: "1:414522555581:web:29f74477e715dc3edd0bd4",
-  measurementId: "G-TF1V1JZLPV",
-};
-
-const instance = firebase.initializeApp(firebaseConfig);
+// const instance = firebase.initializeApp(firebaseConfig);
 
 export function createUser({
   first_name,
@@ -23,37 +30,30 @@ export function createUser({
   // confirmPassword,
   // nationalID,
 }) {
-  firebase
-    .auth()
-    .createUserWithEmailAndPassword(email, password)
+  createUserWithEmailAndPassword(email, password)
     .then(data => {
       const userID = data.uid;
-      firebase
-        .database()
-        .ref("users/" + userID)
-        .set({
-          userID: userID,
-          email: email,
-          password: password,
-          firstname: first_name,
-          lastname: last_name,
-          admin: true,
+      dbRef("users/" + userID).set({
+        userID: userID,
+        email: email,
+        password: password,
+        firstname: first_name,
+        lastname: last_name,
+        admin: true,
 
-          // nationalID: nationalID,
-          // phoneNumber: phone,
-          // confirmPassword: confirmPassword,
-        });
-      firebase
-        .auth()
-        .currentUser.sendEmailVerification()
-        .then(
-          function () {
-            setLoading(false);
-          },
-          function (error) {
-            // An error happened.
-          }
-        );
+        // nationalID: nationalID,
+        // phoneNumber: phone,
+        // confirmPassword: confirmPassword,
+      });
+
+      sendEmailVerification().then(
+        function () {
+          setLoading(false);
+        },
+        function (error) {
+          // An error happened.
+        }
+      );
     })
     .catch(function (error) {
       // Handle Errors here.
@@ -72,9 +72,7 @@ export function createUser({
 }
 
 export function signUserIn(providedEmail, providedPassword, props, setLoading) {
-  firebase
-    .auth()
-    .signInWithEmailAndPassword(providedEmail, providedPassword)
+  signInWithEmailAndPassword(providedEmail, providedPassword)
     // .then(() => {})
     .then(() => props.history.push("/admin/index"))
     .catch(function (error) {
@@ -86,9 +84,7 @@ export function signUserIn(providedEmail, providedPassword, props, setLoading) {
 }
 
 export function forgotPassword(email, that) {
-  firebase
-    .auth()
-    .sendPasswordResetEmail(email)
+  sendPasswordResetEmail(email)
     .then(() => {
       alert("Please check your email...");
     })
@@ -100,7 +96,7 @@ export function forgotPassword(email, that) {
 
 export const logout = async props => {
   try {
-    await firebase.auth().signOut();
+    await signOut();
     // props.navigation.navigate("signin");
   } catch (e) {
     console.log(e);
@@ -109,7 +105,7 @@ export const logout = async props => {
 
 export function getUserData() {
   const items = [];
-  const userRef = firebase.database().ref("/users");
+  const userRef = dbRef("/users");
   userRef.on("value", function (snapshot) {
     for (var key in snapshot.val()) {
       var dataOb = snapshot.val()[key];
@@ -117,12 +113,13 @@ export function getUserData() {
     }
   });
 
-  return items;
+  // return items;
+  return {};
 }
 
 export function getEmergencyData() {
   const items = [];
-  const emergencyRef = firebase.database().ref("/posts");
+  const emergencyRef = dbRef("/posts");
   emergencyRef.on("value", function (snapshot) {
     for (var key in snapshot.val()) {
       var dataOb = snapshot.val()[key];
@@ -145,9 +142,7 @@ export function submitTips({ title, description, setLoading }) {
     .toLocaleTimeString()
     .replace(/([\d]+:[\d]{2})(:[\d]{2})(.*)/, "$1$3");
 
-  firebase
-    .database()
-    .ref("tips")
+  dbRef("tips")
     .set({
       title: title,
       description: description,
