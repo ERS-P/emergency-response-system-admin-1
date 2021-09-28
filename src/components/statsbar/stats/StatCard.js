@@ -47,7 +47,7 @@ const BottomSheet = styled.div`
   }
 
   #lower {
-    // border: 1px solid black;
+    padding-top: 1em;
     #timespan {
       font-weight: 1;
       color: #a9b4c1;
