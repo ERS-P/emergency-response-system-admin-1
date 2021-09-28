@@ -1,18 +1,15 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { TabButton, RTable, VTable } from ".";
 // import Form from "./Form";
 // import Table from "./Table";
 import { Button } from "../gen/";
 
 function Sheet() {
-  const [page, setPage] = useState("compose");
+  const [page, setPage] = useState("victims");
 
-  function togglePage() {
-    if (page === "compose") {
-      setPage("view");
-    } else {
-      setPage("compose");
-    }
+  function togglePage(arg) {
+    setPage(arg);
   }
 
   function buttonText() {
@@ -26,10 +23,26 @@ function Sheet() {
   return (
     <Stylesheet>
       <div id="head">
-        <p>Tips</p>
-        <Button color="purple_0" onClick={togglePage} title={buttonText()} />
+        <div id="tabs">
+          <TabButton
+            active={page.match("victims")}
+            title="Victims"
+            onClick={() => togglePage("victims")}
+          />
+          <TabButton
+            title="Respondents"
+            onClick={() => togglePage("respondents")}
+            active={page.match("respondents")}
+            // style={{
+            //   background: page === "respondents" ? "#F3F4F6" : "transparent",
+            // }}
+          />
+        </div>
       </div>
-      {/* <div id="body">{page === "compose" ? <Form /> : <Table />}</div> */}
+      <div id="body">
+        {page === "victims" && <VTable />}
+        {page === "respondents" && <RTable />}
+      </div>
     </Stylesheet>
   );
 }
@@ -50,13 +63,26 @@ const Stylesheet = styled.div`
 
   #head {
     background-color: white;
-    padding: 1.5em;
+    padding: 3em 1em 1em 1em;
     display: flex;
     align-items: flex-end;
+    justify-content: space-between;
+    background: rgb(229, 231, 235);
+    background: rgb(239, 246, 255);
+    background: linear-gradient(
+      0deg,
+      rgba(239, 246, 255, 1) 0%,
+      rgba(255, 255, 255, 1) 50%
+    );
+
+    #tabs {
+      // border: 1px solid black;
+      display: flex;
+    }
   }
 
   #body {
-    background: #f8fafc;
+    background: #f9fafb;
     padding: 1.8em;
   }
 `;

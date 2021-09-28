@@ -6,22 +6,30 @@ function Table() {
   return (
     <Styledtbl>
       <tr>
-        <th>TITLE</th>
-        <th>SEVERITY</th>
-        <th>LOCATION</th>
-        <th>VIEW DETAILS</th>
-        <th>DISPATCH</th>
+        <th>FIRST NAME</th>
+        <th>LAST NAME</th>
+        <th>EMAIL</th>
+        <th>PHONE NUMBER</th>
+        <th>VIEW MORE</th>
       </tr>
 
       <tr>
-        <td>Flood Emergency reported at Legon</td>
-        <td>Low</td>
-        <td>Legon</td>
+        <td>Rita</td>
+        <td>Tetteh</td>
+        <td>rittat@gmail.com</td>
+        <td>+233 442918231</td>
         <td>
-          <Button title="View Details" />
+          <Button title="View Details" color="blue_0" />
         </td>
+      </tr>
+
+      <tr>
+        <td>Michael</td>
+        <td>Parry</td>
+        <td>mparry@gmail.com</td>
+        <td>+233 442918231</td>
         <td>
-          <Button title="Dispatch" color="green_0" />
+          <Button title="View Details" color="blue_0" />
         </td>
       </tr>
     </Styledtbl>
