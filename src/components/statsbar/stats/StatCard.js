@@ -9,7 +9,7 @@ const BottomSheet = styled.div`
   flex-direction: column;
   background-color: white;
   padding: 1em 1.5em;
-  width: 23.5%;
+  width: 20%;
   border-radius: 0.5em;
 
   p {

@@ -51,3 +51,7 @@ label {
   font-size: 32px;
   color: #152e87;
 }
+
+p {
+  margin: 0;
+}
