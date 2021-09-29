@@ -6,6 +6,7 @@ import {
   sendPasswordResetEmail,
   sendEmailVerification,
   signOut,
+  getAuth,
 } from "firebase/auth";
 import { ref } from "firebase/database";
 
@@ -27,5 +28,6 @@ export {
   sendPasswordResetEmail,
   sendEmailVerification,
   signOut,
+  getAuth,
   ref as dbRef,
 };

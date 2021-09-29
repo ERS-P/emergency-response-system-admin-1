@@ -1,12 +1,66 @@
+import React, { useState, useContext } from "react";
+import { useHistory } from "react-router-dom";
 import { Button } from "components/gen";
-import React from "react";
 import styled from "styled-components";
+import { AppContext } from "../../context";
 import { ReactComponent as Lock } from "../../assets/svgs/lock-alt.svg";
 import { ReactComponent as Envelope } from "../../assets/svgs/envelope.svg";
-import { ReactComponent as Github } from "../../assets/img/icons/common/github.svg";
 import { ReactComponent as Google } from "../../assets/img/icons/common/google.svg";
+import { signUserIn } from "../../api/auth";
 
-function form() {
+function Form() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const { appState, appDispatch } = useContext(AppContext);
+  // console.log(appState);
+
+  const history = useHistory();
+
+  const handleEmailChange = event => {
+    const email_val = event.target.value;
+    setEmail(email_val);
+  };
+
+  const handlePasswordChange = event => {
+    const password_val = event.target.value;
+    setPassword(password_val);
+  };
+
+  const signIn = () => {
+    setLoading(true);
+    signUserIn(
+      {
+        email,
+        password,
+      },
+      res => {
+        console.log(res);
+      },
+      setLoading
+    );
+
+    // setTimeout(() => {
+    //   appDispatch({
+    //     type: "login",
+    //   });
+    //   setLoading(false);
+    // }, 3000);
+    // firebase
+    //   .auth()
+    //   .signInWithEmailAndPassword(email, password)
+    //   .then(function () {
+    //     history.push("/admin/index");
+    //   })
+    //   .catch(error => {
+    //     var errorMessage = error.message;
+    //     setLoading(false);
+    //     alert(errorMessage);
+    //   });
+  };
+
+  // console.log(email, password);
+
   return (
     <StyledForm>
       <form className="signin-form">
@@ -46,7 +100,11 @@ function form() {
               </div>
               <div className="input-place">
                 {" "}
-                <input type="email" placeholder="Email" />{" "}
+                <input
+                  onChange={handleEmailChange}
+                  type="email"
+                  placeholder="Email"
+                />{" "}
               </div>
             </div>
 
@@ -62,7 +120,11 @@ function form() {
               </div>
               <div className="input-place">
                 {" "}
-                <input type="password" placeholder="Password" />{" "}
+                <input
+                  onChange={handlePasswordChange}
+                  type="password"
+                  placeholder="Password"
+                />{" "}
               </div>
             </div>
           </div>
@@ -73,9 +135,13 @@ function form() {
           <div id="submit-field">
             <Button
               textColor="#ffffff"
-              title="Sign in"
+              title={loading ? "..." : "Sign in"}
               color="blue_0"
               padding=".8em 1.5em"
+              onClick={event => {
+                event.preventDefault();
+                signIn();
+              }}
             />
           </div>
         </div>
@@ -84,7 +150,7 @@ function form() {
   );
 }
 
-export default form;
+export default Form;
 
 const StyledForm = styled.div`
   display: flex;
@@ -217,5 +283,9 @@ const StyledForm = styled.div`
         color: #ffffff !important;
       }
     }
+  }
+
+  @media screen and (max-width: 1200px) {
+    padding: 1% 10%;
   }
 `;

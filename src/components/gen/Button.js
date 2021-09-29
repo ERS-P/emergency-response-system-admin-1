@@ -19,7 +19,9 @@ function Button({
         background: colors[color],
         padding: padding ? padding : "0.75em",
       }}
-      onClick={onClick}
+      onClick={event => {
+        onClick(event);
+      }}
     >
       <p style={{ color: "#ffffff", fontWeight: "600" }}>{title}</p>
     </Styledbtn>

@@ -1,4 +1,3 @@
-// import firebase from "firebase";
 import {
   dbRef,
   createUserWithEmailAndPassword,
@@ -6,19 +5,8 @@ import {
   signInWithEmailAndPassword,
   sendPasswordResetEmail,
   signOut,
+  getAuth,
 } from "../firebase";
-// // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-// const firebaseConfig = {
-//   apiKey: "AIzaSyAnviofAwpud7RI5hOzvJPyuzqzHJ8t19A",
-//   authDomain: "emergency-response-system-2021.firebaseapp.com",
-//   projectId: "emergency-response-system-2021",
-//   storageBucket: "emergency-response-system-2021.appspot.com",
-//   messagingSenderId: "414522555581",
-//   appId: "1:414522555581:web:29f74477e715dc3edd0bd4",
-//   measurementId: "G-TF1V1JZLPV",
-// };
-
-// const instance = firebase.initializeApp(firebaseConfig);
 
 export function createUser({
   first_name,
@@ -71,14 +59,16 @@ export function createUser({
   return true;
 }
 
-export function signUserIn(providedEmail, providedPassword, props, setLoading) {
-  signInWithEmailAndPassword(providedEmail, providedPassword)
-    // .then(() => {})
-    .then(() => props.history.push("/admin/index"))
-    .catch(function (error) {
-      // Handle Errors here.
+export function signUserIn(auth_obj, success = () => {}, setLoading) {
+  const auth = getAuth();
+  signInWithEmailAndPassword(auth, auth_obj.email, auth_obj.password)
+    .then(res => {
+      success(res);
       setLoading(false);
-      alert(error);
+    })
+    .catch(error => {
+      setLoading(false);
+      console.log(error);
     });
   return;
 }
