@@ -11,10 +11,17 @@ function Button({
   onClick = () => {},
   title = "button",
   color = colors.blue_0,
+  padding,
 }) {
   return (
-    <Styledbtn style={{ background: colors[color] }} onClick={onClick}>
-      <p>{title}</p>
+    <Styledbtn
+      style={{
+        background: colors[color],
+        padding: padding ? padding : "0.75em",
+      }}
+      onClick={onClick}
+    >
+      <p style={{ color: "#ffffff", fontWeight: "600" }}>{title}</p>
     </Styledbtn>
   );
 }
@@ -24,7 +31,7 @@ export default Button;
 const Styledbtn = styled.button`
   border: 0;
   background-color: #13c8e9;
-  color: white;
+
   padding: 0.75em;
   cursor: pointer;
   border-radius: 0.5em;
@@ -35,5 +42,6 @@ const Styledbtn = styled.button`
   p {
     margin: 0;
     font-weight: 500;
+    color: white !important;
   }
 `;

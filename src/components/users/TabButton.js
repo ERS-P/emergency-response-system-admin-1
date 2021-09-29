@@ -20,12 +20,13 @@ const StyledTB = styled.div`
   background: ${({ active }) => (active ? "#F3F4F6" : "transparent")}
   cursor: pointer;
   border-radius: 10% 10% 0% 0% / 20% 20% 0% 0%;
-  border-width: ${({ active }) => (active ? "1px" : "0 0 1px 0")};
+  border-width: ${({ active }) => (active ? "1px 1px 0 1px" : "0 0 1px 0")};
   border-color: #e5e7eb;
   border-style: solid;
 
   :hover {
-    border-width: 1px;
+    ${({ active }) => !active && "border-width: 1px;"}
+    // border-width: ${({ active }) => (active ? "initial" : "1px")};
     color: ${({ active }) => (active ? "initial" : "#3b82f6")};
   }
 `;

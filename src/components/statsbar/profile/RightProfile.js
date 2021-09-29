@@ -4,16 +4,17 @@ import pfp from "../../../assets/img/pfp.png";
 import Dropdown from "./Dropdown";
 
 function RightProfile(props) {
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(true);
 
-  function showDropdown() {
-    setShow(true);
+  function toggleDropdownVisibility() {
+    setShow(!show);
   }
+
   return (
     <BottomSheet
-      onClick={() => {
-        setShow(true);
-      }}
+    // onClick={() => {
+    //   toggleDropdownVisibility();
+    // }}
     >
       <img src={pfp} id="pfp" />
       <p id="name">Philip Amankwah</p>

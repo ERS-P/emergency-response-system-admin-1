@@ -10,12 +10,12 @@ import { ReactComponent as Running } from "../../../assets/svgs/running.svg";
 
 function Dropdown(props) {
   const { appDispatch } = useContext(AppContext);
-  const wrapperRef = useRef(null);
+  const wrapperRef = useRef();
 
   useEffect(() => {
     function handleClickOutside(event) {
-      props.setShow(false);
-      //   alert("asd");
+      // props.setShow(false);
+      // alert("clicked out");
     }
     // Bind the event listener
     document.addEventListener("mousedown", handleClickOutside);
@@ -26,7 +26,7 @@ function Dropdown(props) {
   }, [wrapperRef]);
 
   return (
-    <BottomSheet show={props.show}>
+    <BottomSheet show={props.show} ref={wrapperRef}>
       <div id="top-section">
         <p id="welcome-note">WELCOME!</p>
       </div>

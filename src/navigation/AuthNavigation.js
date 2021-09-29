@@ -5,10 +5,10 @@ import { Signup, Signin } from "../views/auth/";
 const AuthNavigation = () => {
   return (
     <Switch>
-      <Route path="/sign-in" component={Signin} />
-      <Route path="/sign-up" component={Signup} />
+      <Route path="/auth" component={Signin} />
+      {/* <Route path="/sign-up" component={Signup} /> */}
       <Route exact path="/">
-        <Redirect to="/sign-in" />
+        <Redirect to="/auth" />
       </Route>
       <Route>
         <Signin />

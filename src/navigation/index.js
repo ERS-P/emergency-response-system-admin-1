@@ -6,8 +6,9 @@ import AuthNavigation from "./AuthNavigation";
 
 const Navigator = () => {
   const { appState } = useContext(AppContext);
-  // const { isLoggedIn } = appState;
-  const isLoggedIn = true;
+  const { isLoggedIn } = appState;
+  // const isLoggedIn = true;
+  // console.log(appState);
 
   return (
     <BrowserRouter>
