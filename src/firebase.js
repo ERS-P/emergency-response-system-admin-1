@@ -7,6 +7,8 @@ import {
   sendEmailVerification,
   signOut,
   getAuth,
+  GoogleAuthProvider,
+  signInWithPopup,
 } from "firebase/auth";
 import { ref } from "firebase/database";
 
@@ -30,4 +32,6 @@ export {
   signOut,
   getAuth,
   ref as dbRef,
+  GoogleAuthProvider,
+  signInWithPopup,
 };

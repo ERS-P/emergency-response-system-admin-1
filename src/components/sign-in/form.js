@@ -6,7 +6,7 @@ import { AppContext } from "../../context";
 import { ReactComponent as Lock } from "../../assets/svgs/lock-alt.svg";
 import { ReactComponent as Envelope } from "../../assets/svgs/envelope.svg";
 import { ReactComponent as Google } from "../../assets/img/icons/common/google.svg";
-import { signUserIn } from "../../api/auth";
+import { signUserIn, signUserInWithGoogle } from "../../api/auth";
 
 function Form() {
   const [email, setEmail] = useState("");
@@ -27,6 +27,10 @@ function Form() {
     setPassword(password_val);
   };
 
+  const signInWithGoogle = () => {
+    signUserInWithGoogle();
+  };
+
   const signIn = () => {
     setLoading(true);
     signUserIn(
@@ -45,27 +49,7 @@ function Form() {
       },
       setLoading
     );
-
-    // setTimeout(() => {
-    //   appDispatch({
-    //     type: "login",
-    //   });
-    //   setLoading(false);
-    // }, 3000);
-    // firebase
-    //   .auth()
-    //   .signInWithEmailAndPassword(email, password)
-    //   .then(function () {
-    //     history.push("/admin/index");
-    //   })
-    //   .catch(error => {
-    //     var errorMessage = error.message;
-    //     setLoading(false);
-    //     alert(errorMessage);
-    //   });
   };
-
-  // console.log(email, password);
 
   return (
     <StyledForm>
@@ -76,7 +60,7 @@ function Form() {
           </div>
 
           <div id="alt-signin">
-            <div>
+            <div onClick={signInWithGoogle}>
               <Google
                 style={{
                   width: "1em",
