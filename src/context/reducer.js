@@ -14,6 +14,7 @@ export const reducer = (state, action) => {
       return {
         ...state,
         isLoggedIn: true,
+        currentUser: user,
       };
 
     case "logout":

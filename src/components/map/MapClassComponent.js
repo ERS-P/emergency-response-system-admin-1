@@ -5,10 +5,11 @@ import MapboxDirections from "@mapbox/mapbox-gl-directions/dist/mapbox-gl-direct
 import "mapbox-gl/dist/mapbox-gl.css";
 import "@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions.css";
 import geodata from "../../assets/geo/geodata.json";
+// import { getEmergencyData } from "../api/auth";
 
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_TOKEN;
 // const parsedgeodata = JSON.parse(geodata)
-console.log(geodata.features[0].geometry.coordinates);
+// console.log(geodata.features[0].geometry.coordinates);
 
 class Map extends React.Component {
   constructor(props) {

@@ -35,7 +35,13 @@ function Form() {
         password,
       },
       res => {
-        console.log(res);
+        // console.log(res.user);
+        if (res.user) {
+          appDispatch({
+            type: "login",
+            user: res.user,
+          });
+        }
       },
       setLoading
     );
