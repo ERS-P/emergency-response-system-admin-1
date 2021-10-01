@@ -52,10 +52,10 @@ function Form() {
       <form className="signin-form">
         <div className="form-head">
           <div id="sub">
-            <p>Sign in with</p>
+            <p>Sign in </p>
           </div>
 
-          <div id="alt-signin">
+          {/* <div id="alt-signin">
             <div onClick={signUserInWithGoogle}>
               <Google
                 style={{
@@ -66,13 +66,10 @@ function Form() {
               />
               <p>Google </p>
             </div>
-          </div>
+          </div> */}
         </div>
 
         <div className="form-body">
-          <div id="body-sub">
-            <p>Or sign in with credentials</p>
-          </div>
           <div id="input-field">
             <div className="input-bracket">
               <div className="icon-place">
