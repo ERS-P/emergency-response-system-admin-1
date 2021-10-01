@@ -7,7 +7,12 @@ import {
   GoogleAuthProvider,
   signOut,
   getAuth,
-  signInWithPopup,
+  signInWithRedirect,
+  child,
+  get,
+  database,
+  onValue,
+  ref,
 } from "../firebase";
 
 export function createUser({
@@ -82,7 +87,7 @@ export function signUserInWithGoogle(email_arg, password_arg) {
     prompt: "select_account",
     login_hint: "user@example.com",
   });
-  signInWithPopup(auth, provider)
+  signInWithRedirect(auth, provider)
     .then(result => {
       // This gives you a Google Access Token. You can use it to access the Google API.
       const credential = GoogleAuthProvider.credentialFromResult(result);
@@ -123,32 +128,46 @@ export const logout = async props => {
   }
 };
 
-export function getUserData() {
-  const items = [];
-  const userRef = dbRef("/users");
-  userRef.on("value", function (snapshot) {
-    for (var key in snapshot.val()) {
-      var dataOb = snapshot.val()[key];
-      if (typeof dataOb === "object") items.push(dataOb);
-    }
-  });
+export function getEmergencyData(success) {
+  const postsRef = dbRef(database, "posts/");
+  const report = [];
 
-  // return items;
-  return {};
+  onValue(
+    postsRef,
+    snapshot => {
+      const data = snapshot.val();
+      success(data);
+    },
+    error => {
+      console.log(error);
+    }
+  );
+
+  // get(child(dbRef, `users/`))
+  //   .then(snapshot => {
+  //     if (snapshot.exists()) {
+  //       console.log(snapshot.val());
+  //     } else {
+  //       console.log("No data available");
+  //     }
+  //   })
+  //   .catch(error => {
+  //     console.error(error);
+  //   });
 }
 
-export function getEmergencyData() {
-  const items = [];
-  const emergencyRef = dbRef("/posts");
-  emergencyRef.on("value", function (snapshot) {
-    for (var key in snapshot.val()) {
-      var dataOb = snapshot.val()[key];
-      if (typeof dataOb === "object") items.push(dataOb);
-    }
-  });
+// export function getEmergencyData() {
+//   const items = [];
+//   const emergencyRef = dbRef("/posts");
+//   emergencyRef.on("value", function (snapshot) {
+//     for (var key in snapshot.val()) {
+//       var dataOb = snapshot.val()[key];
+//       if (typeof dataOb === "object") items.push(dataOb);
+//     }
+//   });
 
-  return items;
-}
+//   return items;
+// }
 
 // export function getEmergencyReports() {
 //   // Get a database reference to our posts

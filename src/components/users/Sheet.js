@@ -1,9 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { TabButton, RTable, VTable } from ".";
-// import Form from "./Form";
-// import Table from "./Table";
-import { Button } from "../gen/";
 
 function Sheet() {
   const [page, setPage] = useState("victims");

@@ -1,29 +1,40 @@
 import { Button } from "components/gen";
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
+import { AppContext } from "../../context";
 
-function Table() {
+function Table({ data }) {
+  const { appState } = useContext(AppContext);
+
   return (
     <Styledtbl>
-      <tr>
-        <th>TITLE</th>
-        <th>SEVERITY</th>
-        <th>LOCATION</th>
-        <th>VIEW DETAILS</th>
-        <th>DISPATCH</th>
-      </tr>
+      <thead>
+        <tr>
+          <th>CATEGORY</th>
+          <th>SEVERITY</th>
+          <th>LOCATION</th>
+          <th>VIEW DETAILS</th>
+          <th>DISPATCH</th>
+        </tr>
+      </thead>
 
-      <tr>
-        <td>Flood Emergency reported at Legon</td>
-        <td>Low</td>
-        <td>Legon</td>
-        <td>
-          <Button title="View Details" />
-        </td>
-        <td>
-          <Button title="Dispatch" color="green_0" />
-        </td>
-      </tr>
+      <tbody>
+        {appState.reports.map(({ type, postSeverity }, idx) => {
+          return (
+            <tr key={idx}>
+              <td>{type.charAt(0).toUpperCase() + type.slice(1)}</td>
+              <td>{!!postSeverity ? "High" : "Low"}</td>
+              <td>Town</td>
+              <td>
+                <Button title="View Details" />
+              </td>
+              <td>
+                <Button title="Dispatch" color="green_0" />
+              </td>
+            </tr>
+          );
+        })}
+      </tbody>
     </Styledtbl>
   );
 }

@@ -4,6 +4,7 @@ import { auth } from "../firebase";
 export const initialState = {
   isLoggedIn: false,
   currentUser: {},
+  reports: [],
 };
 
 export const reducer = (state, action) => {
@@ -28,6 +29,12 @@ export const reducer = (state, action) => {
       return {
         ...state,
         currentUser: user,
+      };
+
+    case "set_reports":
+      return {
+        ...state,
+        reports: payload.reports,
       };
 
     default:

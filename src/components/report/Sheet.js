@@ -1,18 +1,38 @@
-import React from "react";
+import React, { useEffect, useState, useContext } from "react";
 import styled from "styled-components";
 import Table from "./table";
-import { Button } from "../gen/";
+import { getEmergencyData } from "../../api/auth";
+import { AppContext } from "../../context";
 
 function Sheet() {
+  const { appDispatch } = useContext(AppContext);
+
+  useEffect(() => {
+    getEmergencyData(saveData);
+  }, []);
+
   return (
     <Stylesheet>
       <div id="head">
-        <p>Emergency Reports</p>
+        <p>Emergency Report</p>
       </div>
       <Table />
-      {/* <div id="body">{page === "compose" ? <Form /> : <Table />}</div> */}
     </Stylesheet>
   );
+
+  function saveData(data) {
+    const entries = data;
+    const arr = [];
+    for (const key in entries) {
+      arr.push(entries[key]);
+    }
+    appDispatch({
+      type: "set_reports",
+      payload: {
+        reports: arr,
+      },
+    });
+  }
 }
 
 export default Sheet;

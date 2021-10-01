@@ -5,33 +5,36 @@ import styled from "styled-components";
 function Table() {
   return (
     <Styledtbl>
-      <tr>
-        <th>FIRST NAME</th>
-        <th>LAST NAME</th>
-        <th>EMAIL</th>
-        <th>PHONE NUMBER</th>
-        <th>VIEW MORE</th>
-      </tr>
+      <thead>
+        <tr>
+          <th>FIRST NAME</th>
+          <th>LAST NAME</th>
+          <th>EMAIL</th>
+          <th>PHONE NUMBER</th>
+          <th>VIEW MORE</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Rita</td>
+          <td>Tetteh</td>
+          <td>rittat@gmail.com</td>
+          <td>+233 442918231</td>
+          <td>
+            <Button title="View Details" color="blue_0" />
+          </td>
+        </tr>
 
-      <tr>
-        <td>Rita</td>
-        <td>Tetteh</td>
-        <td>rittat@gmail.com</td>
-        <td>+233 442918231</td>
-        <td>
-          <Button title="View Details" color="blue_0" />
-        </td>
-      </tr>
-
-      <tr>
-        <td>Michael</td>
-        <td>Parry</td>
-        <td>mparry@gmail.com</td>
-        <td>+233 442918231</td>
-        <td>
-          <Button title="View Details" color="blue_0" />
-        </td>
-      </tr>
+        <tr>
+          <td>Michael</td>
+          <td>Parry</td>
+          <td>mparry@gmail.com</td>
+          <td>+233 442918231</td>
+          <td>
+            <Button title="View Details" color="blue_0" />
+          </td>
+        </tr>
+      </tbody>
     </Styledtbl>
   );
 }

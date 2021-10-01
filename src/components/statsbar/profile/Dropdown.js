@@ -32,9 +32,9 @@ function Dropdown(props) {
       </div>
       <div id="list">
         <DropdownItem icon={User} title="My profile" />
-        <DropdownItem icon={Cog} title="Settings" />
+        {/* <DropdownItem icon={Cog} title="Settings" />
         <DropdownItem icon={Calendar} title="Activity" />
-        <DropdownItem icon={Lifering} title="Support" />
+        <DropdownItem icon={Lifering} title="Support" /> */}
         <div
           id="bottom-section"
           onClick={() => {

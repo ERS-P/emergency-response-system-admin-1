@@ -27,10 +27,6 @@ function Form() {
     setPassword(password_val);
   };
 
-  const signInWithGoogle = () => {
-    signUserInWithGoogle();
-  };
-
   const signIn = () => {
     setLoading(true);
     signUserIn(
@@ -60,7 +56,7 @@ function Form() {
           </div>
 
           <div id="alt-signin">
-            <div onClick={signInWithGoogle}>
+            <div onClick={signUserInWithGoogle}>
               <Google
                 style={{
                   width: "1em",
