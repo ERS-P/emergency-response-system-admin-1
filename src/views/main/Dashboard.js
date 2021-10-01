@@ -14,6 +14,7 @@ import {
   Col,
   Spinner,
 } from "reactstrap";
+import { Modal } from "../../components/gen";
 // import { chartOptions, parseOptions, chartExample1 } from "variables/charts.js";
 
 const Dashboard = () => {
@@ -31,6 +32,7 @@ const Dashboard = () => {
   //   };
   return (
     <div>
+      <Modal />
       {/* <Container className="mt--7" fluid>
         <Row>
           <Col className="mb-5 mb-xl-0" xl="8">

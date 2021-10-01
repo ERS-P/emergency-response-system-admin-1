@@ -1,11 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import styled from "styled-components";
 import Form from "./Form";
 import Table from "./Table";
 import { Button } from "../gen/";
+import { getTipsData } from "../../api/auth";
+import { AppContext } from "../../context";
 
 function Sheet() {
   const [page, setPage] = useState("compose");
+  const { appDispatch } = useContext(AppContext);
+
+  useEffect(() => {
+    getTipsData(saveData);
+  }, []);
+
+  return (
+    <Stylesheet>
+      <div id="head">
+        <p>Tips</p>
+        <Button color="purple_0" onClick={togglePage} title={buttonText()} />
+      </div>
+      <div id="body">{page === "compose" ? <Form /> : <Table />}</div>
+    </Stylesheet>
+  );
 
   function togglePage() {
     if (page === "compose") {
@@ -23,15 +40,19 @@ function Sheet() {
     }
   }
 
-  return (
-    <Stylesheet>
-      <div id="head">
-        <p>Tips</p>
-        <Button color="purple_0" onClick={togglePage} title={buttonText()} />
-      </div>
-      <div id="body">{page === "compose" ? <Form /> : <Table />}</div>
-    </Stylesheet>
-  );
+  function saveData(data) {
+    const entries = data;
+    const arr = [];
+    for (const key in entries) {
+      arr.push(entries[key]);
+    }
+    appDispatch({
+      type: "set_tips",
+      payload: {
+        tips: arr,
+      },
+    });
+  }
 }
 
 export default Sheet;

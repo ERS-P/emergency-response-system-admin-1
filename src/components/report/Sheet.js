@@ -1,14 +1,15 @@
 import React, { useEffect, useState, useContext } from "react";
 import styled from "styled-components";
 import Table from "./table";
-import { getEmergencyData } from "../../api/auth";
+import { getEmergencyData, getEmergencyData1 } from "../../api/auth";
 import { AppContext } from "../../context";
 
 function Sheet() {
   const { appDispatch } = useContext(AppContext);
 
   useEffect(() => {
-    getEmergencyData(saveData);
+    // getEmergencyData(saveData);
+    getEmergencyData1(globalSave);
   }, []);
 
   return (
@@ -19,6 +20,19 @@ function Sheet() {
       <Table />
     </Stylesheet>
   );
+
+  function saveData1(data) {
+    console.log(data, "save data 1");
+  }
+
+  function globalSave(arr) {
+    appDispatch({
+      type: "set_reports",
+      payload: {
+        reports: arr,
+      },
+    });
+  }
 
   function saveData(data) {
     const entries = data;

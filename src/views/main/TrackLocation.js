@@ -1,11 +1,12 @@
 import React from "react";
 import { Footer } from "../../components/gen";
-import { MapContainer } from "../../components/map/";
+import { MapContainer, Map1 } from "../../components/map/";
 
 const TrackLocation = () => {
   return (
     <div>
-      <MapContainer />
+      {/* <MapContainer /> */}
+      <Map1 />
       <Footer />
     </div>
   );

@@ -12,6 +12,15 @@ import {
   signInWithRedirect,
 } from "firebase/auth";
 import { ref, getDatabase, child, get, onValue } from "firebase/database";
+import {
+  doc,
+  getDoc,
+  getDocs,
+  collection,
+  query,
+  where,
+  getFirestore,
+} from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -23,6 +32,7 @@ const firebaseConfig = {
 };
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
+const firestoredb = getFirestore(app);
 
 export default app;
 export {
@@ -41,4 +51,11 @@ export {
   get,
   database,
   onValue,
+  doc,
+  getDoc,
+  getDocs,
+  collection,
+  query,
+  where,
+  firestoredb,
 };

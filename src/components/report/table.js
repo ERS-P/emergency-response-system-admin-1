@@ -1,7 +1,8 @@
-import { Button } from "components/gen";
+import { Button, Loader } from "components/gen";
 import React, { useContext } from "react";
 import styled from "styled-components";
 import { AppContext } from "../../context";
+import moment from "moment";
 
 function Table({ data }) {
   const { appState } = useContext(AppContext);
@@ -13,27 +14,42 @@ function Table({ data }) {
           <th>CATEGORY</th>
           <th>SEVERITY</th>
           <th>LOCATION</th>
+          <th>TIME</th>
           <th>VIEW DETAILS</th>
           <th>DISPATCH</th>
         </tr>
       </thead>
 
       <tbody>
-        {appState.reports.map(({ type, postSeverity }, idx) => {
-          return (
-            <tr key={idx}>
-              <td>{type.charAt(0).toUpperCase() + type.slice(1)}</td>
-              <td>{!!postSeverity ? "High" : "Low"}</td>
-              <td>Town</td>
-              <td>
-                <Button title="View Details" />
-              </td>
-              <td>
-                <Button title="Dispatch" color="green_0" />
-              </td>
+        {!appState.reports ||
+          (appState.reports?.length === 0 && (
+            <tr id="loader">
+              <Loader height={50} width={50} />
             </tr>
-          );
-        })}
+          ))}
+        {appState.reports?.map(
+          ({ category, severity, area, createdAt }, idx) => {
+            const time = moment.unix(createdAt.seconds).fromNow();
+            return (
+              <tr key={idx}>
+                <td>
+                  {category?.charAt(0).toUpperCase() + category?.slice(1)}
+                </td>
+                <td>
+                  {severity?.charAt(0).toUpperCase() + severity?.slice(1)}
+                </td>
+                <td>{area}</td>
+                <td>{time}</td>
+                <td>
+                  <Button title="View Details" />
+                </td>
+                <td>
+                  <Button title="Dispatch" color="green_0" />
+                </td>
+              </tr>
+            );
+          }
+        )}
       </tbody>
     </Styledtbl>
   );
@@ -62,5 +78,13 @@ const Styledtbl = styled.table`
     border-bottom: 1px solid #f3f4f6;
     padding: 1.5em 1.5em;
     color: #6b7280;
+  }
+
+  #loader {
+    display: flex;
+    justify-content: center;
+    border: 1px solid;
+    display: block;
+    width: 100%;
   }
 `;

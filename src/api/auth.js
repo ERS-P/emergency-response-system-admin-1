@@ -8,12 +8,15 @@ import {
   signOut,
   getAuth,
   signInWithRedirect,
-  child,
-  get,
   database,
   onValue,
-  ref,
+  collection,
+  query,
+  where,
+  getDocs,
+  firestoredb,
 } from "../firebase";
+import moment from "moment";
 
 export function createUser({
   first_name,
@@ -130,7 +133,6 @@ export const logout = async props => {
 
 export function getEmergencyData(success) {
   const postsRef = dbRef(database, "posts/");
-  const report = [];
 
   onValue(
     postsRef,
@@ -142,18 +144,33 @@ export function getEmergencyData(success) {
       console.log(error);
     }
   );
+}
 
-  // get(child(dbRef, `users/`))
-  //   .then(snapshot => {
-  //     if (snapshot.exists()) {
-  //       console.log(snapshot.val());
-  //     } else {
-  //       console.log("No data available");
-  //     }
-  //   })
-  //   .catch(error => {
-  //     console.error(error);
-  //   });
+export async function getEmergencyData1(cb) {
+  const q = query(collection(firestoredb, "emergencies"));
+  const arr = [];
+
+  const querySnapshot = await getDocs(q);
+  querySnapshot.forEach(doc => {
+    // doc.data() is never undefined for query doc snapshots
+    console.log(moment.unix(doc.data().createdAt.seconds).fromNow());
+    arr.push(doc.data());
+  });
+  cb(arr);
+}
+
+export function getTipsData(success) {
+  const tipsRef = dbRef(database, "tips/");
+  onValue(
+    tipsRef,
+    snapshot => {
+      const data = snapshot.val();
+      success(data);
+    },
+    error => {
+      console.log(error);
+    }
+  );
 }
 
 // export function getEmergencyData() {

@@ -5,6 +5,9 @@ export const initialState = {
   isLoggedIn: false,
   currentUser: {},
   reports: [],
+  tips: [],
+  modalContent: <p>Hi</p>,
+  showModal: false,
 };
 
 export const reducer = (state, action) => {
@@ -35,6 +38,23 @@ export const reducer = (state, action) => {
       return {
         ...state,
         reports: payload.reports,
+      };
+
+    case "set_tips":
+      return {
+        ...state,
+        tips: payload.tips,
+      };
+
+    case "set_modal_content":
+      return {
+        ...state,
+      };
+
+    case "set_show_modal":
+      return {
+        ...state,
+        showModal: payload.setShowModal,
       };
 
     default:

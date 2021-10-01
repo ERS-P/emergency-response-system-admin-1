@@ -4,3 +4,5 @@ export { default as Sheet } from "./Sheet";
 export { default as Footer } from "./Footer";
 export { default as OutsideAlerter } from "./OutsideAlerter";
 export { default as Button } from "./Button";
+export { default as Modal } from "./Modal";
+export { default as Loader } from "./Loader";
