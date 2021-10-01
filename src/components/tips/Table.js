@@ -1,9 +1,10 @@
+import { Button } from "components/gen";
 import React, { useContext } from "react";
 import styled from "styled-components";
 import { AppContext } from "../../context";
 
 function Table() {
-  const { appState } = useContext(AppContext);
+  const { appState, appDispatch } = useContext(AppContext);
 
   return (
     <Styledtbl>
@@ -22,6 +23,18 @@ function Table() {
               <td>{title}</td>
               <td>{type.charAt(0).toUpperCase() + type.slice(1)}</td>
               <td>{truncate(description)}</td>
+              <td>
+                <Button
+                  color="green_0"
+                  title="View all"
+                  onClick={() =>
+                    appDispatch({
+                      type: "set_show_modal",
+                      payload: { setShowModal: true },
+                    })
+                  }
+                />
+              </td>
             </tr>
           );
         })}

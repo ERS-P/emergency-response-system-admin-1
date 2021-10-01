@@ -5,7 +5,7 @@ import { Provider } from "./context";
 
 function App() {
   return (
-    <Provider>
+    <Provider id="root">
       <Navigator />
     </Provider>
   );

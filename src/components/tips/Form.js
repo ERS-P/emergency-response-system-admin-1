@@ -64,7 +64,7 @@ const Stylesheet = styled.div`
     border-radius: 0.5em;
     box-shadow: 0px 3px 5px 1px rgba(150, 161, 172, 0.24);
     -webkit-box-shadow: 0px 3px 5px 1px rgba(150, 161, 172, 0.24);
-    -moz-box-shadow: 0px 3px 5px 1px rgba(150, 161, 172, 0.24);
+    font-family: inherit;
   }
 
   textarea {

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import pfp from "../../../assets/img/pfp.png";
+import pfp from "../../../assets/svgs/user.svg";
 import Dropdown from "./Dropdown";
 import { getAuth } from "../../../firebase";
 
 function RightProfile() {
-  const [show, setShow] = useState(true);
+  const [show, setShow] = useState(false);
   const [currentUser, setCurrentUser] = useState();
 
   useEffect(() => {
@@ -28,7 +28,12 @@ function RightProfile() {
         toggleDropdownVisibility();
       }}
     >
-      <img src={pfp} id="pfp" />
+      <img
+        src={pfp}
+        id="pfp"
+        alt="pfp"
+        style={{ color: "grey", height: ".95em", width: ".95em" }}
+      />
       <p id="name">{currentUser?.displayName || currentUser?.email || "..."}</p>
 
       <Dropdown setShow={setShow} show={show} />
@@ -41,7 +46,6 @@ export default RightProfile;
 const BottomSheet = styled.div`
   cursor: pointer;
   position: relative;
-  //border: 1px solid;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -59,6 +63,10 @@ const BottomSheet = styled.div`
     height: 2em;
     border-radius: 50%;
     object-fit: cover;
+  }
+
+  p {
+    margin: 0;
   }
 `;
 

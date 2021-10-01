@@ -14,7 +14,7 @@ const customStyles = {
 };
 
 // Make sure to bind modal to your appElement (https://reactcommunity.org/react-modal/accessibility/)
-// Modal.setAppElement("#yourAppElement");
+Modal.setAppElement("#root");
 
 function ModalComponent() {
   const { appState, appDispatch } = useContext(AppContext);
@@ -46,7 +46,7 @@ function ModalComponent() {
 
   return (
     <div>
-      <button onClick={openModal}>Open Modal</button>
+      {/* <button onClick={openModal}>Open Modal</button> */}
       <Modal
         isOpen={appState.showModal}
         onAfterOpen={afterOpenModal}
